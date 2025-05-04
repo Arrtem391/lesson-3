@@ -10,11 +10,12 @@ server = smtplib.SMTP_SSL('smtp.yandex.ru', 465)
 server.login(login, password)
 
 site = 'https://dvmn.org/profession-ref-program/spytf/1WJiV/'
+friend_mail = 'kudinowartem22@gmail.com'
 friend_name = 'Илюха'
 my_name = 'Артём'
 
-letter = """From: devmanorg@yandex.ru
-To: kudinowartem22@gmail.com
+letter = """From: %login%
+To: %friend_mail%
 Subject: Приглашение!
 Content-Type: text/plain; charset="UTF-8";
 
@@ -35,9 +36,7 @@ Content-Type: text/plain; charset="UTF-8";
 Регистрируйся → %website%  
 На курсы, которые еще не вышли, можно подписаться и получить уведомление о релизе сразу на имейл."""
 
-letter = letter.replace('%website%', site).replace('%friend_name%', friend_name).replace('%my_name%', my_name)
+letter = letter.replace('%login%', login).replace('%friend_mail%', friend_mail).replace('%website%', site).replace('%friend_name%', friend_name).replace('%my_name%', my_name)
 
 server.sendmail(login, 'kudinowartem22@gmail.com', letter.encode('utf-8'))
 server.quit()
-
-print(letter)
