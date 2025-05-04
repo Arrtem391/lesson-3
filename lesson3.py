@@ -4,18 +4,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-login = os.getenv('login_yandex')
+sender_email = os.getenv('login_yandex')
+sender_name = "Артём"
+recipient_email = "kudinowartem22@gmail.com"
+recipient_name = "Илюха"
+site = 'https://dvmn.org/profession-ref-program/spytf/1WJiV/'
+
 password = os.getenv('password_yandex')
 server = smtplib.SMTP_SSL('smtp.yandex.ru', 465)
-server.login(login, password)
+server.login(sender_email, password)
 
-site = 'https://dvmn.org/profession-ref-program/spytf/1WJiV/'
-friend_mail = 'kudinowartem22@gmail.com'
-friend_name = 'Илюха'
-my_name = 'Артём'
-
-letter = """From: %login%
-To: %friend_mail%
+letter = """From: %sender_email%
+To: %recipient_email%
 Subject: Приглашение!
 Content-Type: text/plain; charset="UTF-8";
 
@@ -36,7 +36,7 @@ Content-Type: text/plain; charset="UTF-8";
 Регистрируйся → %website%  
 На курсы, которые еще не вышли, можно подписаться и получить уведомление о релизе сразу на имейл."""
 
-letter = letter.replace('%login%', login).replace('%friend_mail%', friend_mail).replace('%website%', site).replace('%friend_name%', friend_name).replace('%my_name%', my_name)
+letter = letter.replace('%sender_email%', sender_email).replace('%recipient_email%', recipient_email).replace('%website%', site).replace('%friend_name%', recipient_name).replace('%my_name%', sender_name)
 
-server.sendmail(login, 'kudinowartem22@gmail.com', letter.encode('utf-8'))
+server.sendmail(sender_email, 'kudinowartem22@gmail.com', letter.encode('utf-8'))
 server.quit()
