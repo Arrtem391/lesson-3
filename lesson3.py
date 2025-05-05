@@ -38,5 +38,5 @@ Content-Type: text/plain; charset="UTF-8";
 
 letter = letter.replace('%sender_email%', sender_email).replace('%recipient_email%', recipient_email).replace('%website%', site).replace('%friend_name%', recipient_name).replace('%my_name%', sender_name)
 
-server.sendmail(sender_email, 'kudinowartem22@gmail.com', letter.encode('utf-8'))
+server.sendmail(sender_email, recipient_email, letter.encode('utf-8'))
 server.quit()
